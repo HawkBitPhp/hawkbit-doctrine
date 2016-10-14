@@ -16,7 +16,7 @@ Hawkbit Persitence uses factories of `dasprid/container-interop-doctrine` and wr
 Hawkbit Persistence is available on [Packagist][link-packagist] and can be installed using [Composer](https://getcomposer.org/). This can be done by running the following command or by updating your `composer.json` file.
 
 ```bash
-composer require Hawkbit
+composer require hawkbit/persistence
 ```
 
 composer.json
