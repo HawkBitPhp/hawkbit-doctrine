@@ -18,7 +18,8 @@
   ],
   "require": {
     "php": ">=5.5.0",
-    "doctrine/orm": "~2.0",
+    "doctrine/orm": "~2.5",
+    "dasprid/container-interop-doctrine": "^0.2",
     "hawkbit/hawkbit": "~2.0"
   },
   "require-dev": {
@@ -33,11 +34,6 @@
     "psr-4": {
       "Hawkbit\\Persistence\\Tests\\": "tests/"
     }
-  },
-  "provide": {
-    "container-interop/container-interop-implementation": "^1.1",
-    "psr/http-message-implementation": "~1.0",
-    "psr/log-implementation": "~1.0"
   },
   "scripts": {
     "test": [

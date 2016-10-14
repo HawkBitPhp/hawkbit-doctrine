@@ -62,19 +62,15 @@ use \Hawkbit\Persistence\PersistenceService;
 use \Hawkbit\Persistence\PersistenceServiceProvider;
 
 $app = new Application(require_once __DIR__ . '/config.php');
-$persistenceService = new PersistenceService();
 
-// you could access persistence configuration from application configuration
-// optional set config accessor, default is persistence
-$persistenceService->setConfigAccessor('custom.database');
+$entityFactoryClass = \ContainerInteropDoctrine\EntityManagerFactory::class;
 
-// prefers configuration from application config
-// this option is enabled by default
-$persistenceService->preferConfiguration(true);
+$persistenceService = new PersistenceService([
+   PersistenceService::resolveFactoryAlias($entityFactoryClass) => [$entityFactoryClass]
+], $app);
 
 $app->register(new PersistenceServiceProvider($persistenceService));
 ```
-
 
 Access persistence service in controller
 
@@ -88,12 +84,33 @@ class MyController{
     /**
      * @var \Hawkbit\Persistence\PersistenceServiceInterface 
      */
-    private $persitence = null;
+    private $persistence = null;
     
     public function __construct(PersistenceServiceInterface $persistence){
         $this->persistence = $persistence;
     }
+    
+    public function index(){
+        $em = $this->persistence->getEntityManager();
+        
+        // or with from specific connection
+        $em = $this->persistence->getEntityManager('connectionname');
+    }
 }
+```
+
+Or from application
+
+```php
+<?php
+
+/** @var \Hawkbit\Persistence\PersistenceServiceInterface $persistence */
+$persistence = $app[\Hawkbit\Persistence\PersistenceServiceInterface::class];
+
+$em = $persistence->getEntityManager();
+
+// or with from specific connection
+$em = $persistence->getEntityManager('connectionname');
 
 ```
 
