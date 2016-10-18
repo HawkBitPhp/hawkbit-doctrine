@@ -38,7 +38,7 @@ class PersistenceService implements PersistenceServiceInterface
         $container = new Container();
 
         // share config array
-        $container->share('config', $application->getConfigurator());
+        $container->share('config', $application->getConfigurator()->toArray());
         $this->container = $this->registerFactories($container, $factories);
     }
 
@@ -62,8 +62,8 @@ class PersistenceService implements PersistenceServiceInterface
                 throw new \RuntimeException('Invalid factory class');
             }
 
-            $container->share($alias, function() use ($class, $args){
-                return (new \ReflectionClass($class))->newInstance($args);
+            $container->add($alias, function() use ($class, $args){
+                return (new \ReflectionClass($class))->newInstanceArgs($args);
             });
 
         }
@@ -78,7 +78,9 @@ class PersistenceService implements PersistenceServiceInterface
      * @return EntityManager
      */
     public function getEntityManager($connection = self::DEFAULT_CONNECTION_NAME){
-        return $this->container->get(self::resolveFactoryAlias(EntityManagerFactory::class, $connection));
+        /** @var EntityManagerFactory $emf */
+        $emf = $this->container->get(self::resolveFactoryAlias(EntityManagerFactory::class, $connection), [$connection]);
+        return $emf($this->container);
     }
 
     /**
