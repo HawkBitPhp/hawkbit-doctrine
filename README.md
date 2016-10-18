@@ -52,7 +52,7 @@ The following versions of PHP are supported by this version.
 
 ## Setup
 
-Setup with an existing application configuration
+Setup with an existing application configuration (we refer to [tests/assets/config.php](tests/assets/config.php))
 
 ```php
 <?php
@@ -72,7 +72,31 @@ $persistenceService = new PersistenceService([
 $app->register(new PersistenceServiceProvider($persistenceService));
 ```
 
-Access persistence service in controller
+## Examples
+
+### Full configuration
+
+A full configuration is available on [DASPRiD/container-interop-doctrine/example/full-config.php](https://github.com/DASPRiD/container-interop-doctrine/blob/master/example/full-config.php). 
+Refer to [container-interop-doctrine Documentation](https://github.com/DASPRiD/container-interop-doctrine) for further instructions on factories.
+
+### Persistence from Hawbit Application
+
+```php
+<?php
+
+/** @var \Hawkbit\Persistence\PersistenceServiceInterface $persistence */
+$persistence = $app[\Hawkbit\Persistence\PersistenceServiceInterface::class];
+
+$em = $persistence->getEntityManager();
+
+// or with from specific connection
+$em = $persistence->getEntityManager('connectionname');
+
+```
+
+### Persistence in a Hawkbit controller
+
+Access persistence service in controller. Hawbit is inject classes to controllers by default.
 
 ```php
 <?php
@@ -97,21 +121,6 @@ class MyController{
         $em = $this->persistence->getEntityManager('connectionname');
     }
 }
-```
-
-Or from application
-
-```php
-<?php
-
-/** @var \Hawkbit\Persistence\PersistenceServiceInterface $persistence */
-$persistence = $app[\Hawkbit\Persistence\PersistenceServiceInterface::class];
-
-$em = $persistence->getEntityManager();
-
-// or with from specific connection
-$em = $persistence->getEntityManager('connectionname');
-
 ```
 
 ## Change log
