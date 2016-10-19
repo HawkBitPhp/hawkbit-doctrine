@@ -156,9 +156,9 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-downloads]: https://img.shields.io/packagist/dt/hawkbit/persistence.svg?style=flat-square
 [ico-coveralls]: https://img.shields.io/coveralls/HawkBitPhp/hawkbit-persistence/master.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/hawkbit/hawkbit
-[link-travis]: https://travis-ci.org/HawkBitPhp/hawkbit
-[link-downloads]: https://packagist.org/packages/hawkbit/hawkbit
+[link-packagist]: https://packagist.org/packages/hawkbit/persistence
+[link-travis]: https://travis-ci.org/HawkBitPhp/hawkbit-persistence
+[link-downloads]: https://packagist.org/packages/hawkbit/persistence
 [link-author]: https://github.com/mbunge
 [link-contributors]: ../../contributors
-[link-coveralls]: https://coveralls.io/github/HawkBitPhp/hawkbit
+[link-coveralls]: https://coveralls.io/github/HawkBitPhp/hawkbit-persistence
