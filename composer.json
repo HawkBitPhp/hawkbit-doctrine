@@ -1,5 +1,5 @@
 {
-  "name": "hawkbit/persistence",
+  "name": "hawkbit/doctrine",
   "type": "library",
   "description": "Doctrine 2 ORM integration for Hawkbit PSR-7 Micro PHP framework",
   "keywords": [
@@ -17,7 +17,7 @@
     }
   ],
   "require": {
-    "php": ">=5.5.0",
+    "php": ">=5.6",
     "doctrine/orm": "~2.5",
     "dasprid/container-interop-doctrine": "^0.2",
     "hawkbit/hawkbit": "~2.0"
