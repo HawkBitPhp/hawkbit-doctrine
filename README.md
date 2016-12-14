@@ -156,7 +156,7 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [ico-coveralls]: https://img.shields.io/coveralls/HawkBitPhp/hawkbit-doctrine/master.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/hawkbit/hawkbit-doctrine
-[link-travis]: https://travis-ci.org/HawkBitPhp/hawkbit
+[link-travis]: https://travis-ci.org/HawkBitPhp/hawkbit-doctrine
 [link-downloads]: https://packagist.org/packages/hawkbit/hawkbit-doctrine
 [link-author]: https://github.com/mbunge
 [link-contributors]: ../../contributors
