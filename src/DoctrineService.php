@@ -6,7 +6,7 @@
  * Time: 12:23
  */
 
-namespace Hawkbit\Persistence;
+namespace Hawkbit\Doctrine;
 
 use ContainerInteropDoctrine\EntityManagerFactory;
 use Doctrine\Common\Inflector\Inflector;
@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManager;
 use Hawkbit\Application;
 use League\Container\Container;
 
-class PersistenceService implements PersistenceServiceInterface
+class DoctrineService implements DoctrineServiceInterface
 {
 
     /**

@@ -6,21 +6,21 @@
  * Time: 13:40
  */
 
-namespace Hawkbit\Persistence;
+namespace Hawkbit\Doctrine;
 
 
 use League\Container\Container;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;
 
-class PersistenceServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface
+class DoctrineServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface
 {
 
     protected $provides = [
-        PersistenceServiceInterface::class
+        DoctrineServiceInterface::class
     ];
     /**
-     * @var PersistenceService
+     * @var DoctrineService
      */
     private $persistenceService;
     /**
@@ -30,10 +30,10 @@ class PersistenceServiceProvider extends AbstractServiceProvider implements Boot
 
     /**
      * PersistenceServiceProvider constructor.
-     * @param PersistenceService $persistenceService
+     * @param DoctrineService $persistenceService
      * @param bool $delegate
      */
-    public function __construct(PersistenceService $persistenceService, $delegate = false)
+    public function __construct(DoctrineService $persistenceService, $delegate = false)
     {
         $this->persistenceService = $persistenceService;
         $this->delegate = (bool)$delegate;
@@ -48,7 +48,7 @@ class PersistenceServiceProvider extends AbstractServiceProvider implements Boot
      */
     public function register()
     {
-        $this->getContainer()->share(PersistenceServiceInterface::class, $this->persistenceService);
+        $this->getContainer()->share(DoctrineServiceInterface::class, $this->persistenceService);
     }
 
     /**

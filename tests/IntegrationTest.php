@@ -6,15 +6,15 @@
  * Time: 15:07
  */
 
-namespace Hawkbit\Persistence\Tests;
+namespace Hawkbit\Doctrine\Tests;
 
 
 use ContainerInteropDoctrine\EntityManagerFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Hawkbit\Application;
-use Hawkbit\Persistence\PersistenceService;
-use Hawkbit\Persistence\PersistenceServiceInterface;
-use Hawkbit\Persistence\PersistenceServiceProvider;
+use Hawkbit\Doctrine\DoctrineService;
+use Hawkbit\Doctrine\DoctrineServiceInterface;
+use Hawkbit\Doctrine\DoctrineServiceProvider;
 
 class IntegrationTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,17 +25,17 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
 
         $entityFactoryClass = EntityManagerFactory::class;
 
-        $persistenceService = new PersistenceService([
-            PersistenceService::resolveFactoryAlias($entityFactoryClass) => [$entityFactoryClass]
+        $persistenceService = new DoctrineService([
+            DoctrineService::resolveFactoryAlias($entityFactoryClass) => [$entityFactoryClass]
         ], $app);
 
-        $app->register(new PersistenceServiceProvider($persistenceService));
+        $app->register(new DoctrineServiceProvider($persistenceService));
 
-        $this->assertTrue(isset($app[PersistenceServiceInterface::class]));
+        $this->assertTrue(isset($app[DoctrineServiceInterface::class]));
 
-        /** @var PersistenceServiceInterface $appPersistenceService */
-        $appPersistenceService = $app[PersistenceServiceInterface::class];
-        $this->assertInstanceOf(PersistenceServiceInterface::class, $appPersistenceService);
+        /** @var DoctrineServiceInterface $appPersistenceService */
+        $appPersistenceService = $app[DoctrineServiceInterface::class];
+        $this->assertInstanceOf(DoctrineServiceInterface::class, $appPersistenceService);
         $this->assertInstanceOf(EntityManagerInterface::class, $appPersistenceService->getEntityManager());
     }
 }

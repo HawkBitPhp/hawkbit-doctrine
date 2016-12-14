@@ -1,7 +1,7 @@
 {
   "name": "hawkbit/persistence",
   "type": "library",
-  "description": "Persistence layer for Hawkbit PSR-7 Micro PHP framework",
+  "description": "Doctrine 2 ORM integration for Hawkbit PSR-7 Micro PHP framework",
   "keywords": [
     "doctrine",
     "orm",
@@ -27,12 +27,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Hawkbit\\Persistence\\": "src/"
+      "Hawkbit\\Doctrine\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Hawkbit\\Persistence\\Tests\\": "tests/"
+      "Hawkbit\\Doctrine\\Tests\\": "tests/"
     }
   },
   "scripts": {

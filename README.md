@@ -1,4 +1,4 @@
-# Hawkbit Persistence
+# Hawkbit Doctrine
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -6,17 +6,16 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Coverage Status][ico-coveralls]][link-coveralls]
 
-Persistence layer for Hawkbit PSR-7 Micro PHP framework.
-Hawkbit Persitence uses factories of `dasprid/container-interop-doctrine` and wraps them with in a PersistenceService
+Doctrine 2 ORM integration for Hawkbit PSR-7 Micro PHP framework.
 
 ## Install
 
 ### Using Composer
 
-Hawkbit Persistence is available on [Packagist][link-packagist] and can be installed using [Composer](https://getcomposer.org/). This can be done by running the following command or by updating your `composer.json` file.
+Hawkbit Doctrine is available on [Packagist][link-packagist] and can be installed using [Composer](https://getcomposer.org/). This can be done by running the following command or by updating your `composer.json` file.
 
 ```bash
-composer require hawkbit/persistence
+composer require hawkbit/doctrine
 ```
 
 composer.json
@@ -24,7 +23,7 @@ composer.json
 ```javascript
 {
     "require": {
-        "hawkbit/persistence": "~1.0"
+        "hawkbit/doctrine": "~1.0"
     }
 }
 ```
@@ -39,7 +38,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 ### Downloading .zip file
 
-This project is also available for download as a `.zip` file on GitHub. Visit the [releases page](https://github.com/hawkbit/persistence/releases), select the version you want, and click the "Source code (zip)" download button.
+This project is also available for download as a `.zip` file on GitHub. Visit the [releases page](https://github.com/hawkbit/doctrine/releases), select the version you want, and click the "Source code (zip)" download button.
 
 ### Requirements
 
@@ -58,18 +57,18 @@ Setup with an existing application configuration (we refer to [tests/assets/conf
 <?php
 
 use \Hawkbit\Application;
-use \Hawkbit\Persistence\PersistenceService;
-use \Hawkbit\Persistence\PersistenceServiceProvider;
+use \Hawkbit\Doctrine\DoctrineService;
+use \Hawkbit\Doctrine\DoctrineServiceProvider;
 
 $app = new Application(require_once __DIR__ . '/config.php');
 
 $entityFactoryClass = \ContainerInteropDoctrine\EntityManagerFactory::class;
 
-$persistenceService = new PersistenceService([
-   PersistenceService::resolveFactoryAlias($entityFactoryClass) => [$entityFactoryClass]
+$doctrineService = new DoctrineService([
+   DoctrineService::resolveFactoryAlias($entityFactoryClass) => [$entityFactoryClass]
 ], $app);
 
-$app->register(new PersistenceServiceProvider($persistenceService));
+$app->register(new DoctrineServiceProvider($doctrineService));
 ```
 
 ## Examples
@@ -79,46 +78,46 @@ $app->register(new PersistenceServiceProvider($persistenceService));
 A full configuration is available on [DASPRiD/container-interop-doctrine/example/full-config.php](https://github.com/DASPRiD/container-interop-doctrine/blob/master/example/full-config.php). 
 Refer to [container-interop-doctrine Documentation](https://github.com/DASPRiD/container-interop-doctrine) for further instructions on factories.
 
-### Persistence from Hawbit Application
+### Doctrine from Hawbit Application
 
 ```php
 <?php
 
-/** @var \Hawkbit\Persistence\PersistenceServiceInterface $persistence */
-$persistence = $app[\Hawkbit\Persistence\PersistenceServiceInterface::class];
+/** @var \Hawkbit\Doctrine\DoctrineServiceInterface $doctrine */
+$doctrine = $app[\Hawkbit\Doctrine\DoctrineServiceInterface::class];
 
-$em = $persistence->getEntityManager();
+$em = $doctrine->getEntityManager();
 
 // or with from specific connection
-$em = $persistence->getEntityManager('connectionname');
+$em = $doctrine->getEntityManager('connectionname');
 
 ```
 
-### Persistence in a Hawkbit controller
+### Doctrine in a Hawkbit controller
 
-Access persistence service in controller. Hawbit is inject classes to controllers by default.
+Access doctrine service in controller. Hawbit is inject classes to controllers by default.
 
 ```php
 <?php
 
-use \Hawkbit\Persistence\PersistenceServiceInterface;
+use \Hawkbit\Doctrine\DoctrineServiceInterface;
 
 class MyController{
     
     /**
-     * @var \Hawkbit\Persistence\PersistenceServiceInterface 
+     * @var \Hawkbit\Doctrine\DoctrineServiceInterface 
      */
-    private $persistence = null;
+    private $doctrine = null;
     
-    public function __construct(PersistenceServiceInterface $persistence){
-        $this->persistence = $persistence;
+    public function __construct(DoctrineServiceInterface $doctrine){
+        $this->doctrine = $doctrine;
     }
     
     public function index(){
-        $em = $this->persistence->getEntityManager();
+        $em = $this->doctrine->getEntityManager();
         
         // or with from specific connection
-        $em = $this->persistence->getEntityManager('connectionname');
+        $em = $this->doctrine->getEntityManager('connectionname');
     }
 }
 ```
@@ -144,21 +143,21 @@ If you discover any security related issues, please email <mjls@web.de> instead 
 ## Credits
 
 - [Marco Bunge](https://github.com/mbunge)
-- [All contributors](https://github.com/hawkbit/persistence/graphs/contributors)
+- [All contributors](https://github.com/hawkbit/hawkbit-doctrine/graphs/contributors)
 
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/hawkbit/persistence.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/hawkbit/doctrine.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/HawkBitPhp/hawkbit-persistence/master.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/hawkbit/persistence.svg?style=flat-square
-[ico-coveralls]: https://img.shields.io/coveralls/HawkBitPhp/hawkbit-persistence/master.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/HawkBitPhp/hawkbit-doctrine/master.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/hawkbit/doctrine.svg?style=flat-square
+[ico-coveralls]: https://img.shields.io/coveralls/HawkBitPhp/hawkbit-doctrine/master.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/hawkbit/hawkbit
+[link-packagist]: https://packagist.org/packages/hawkbit/hawkbit-doctrine
 [link-travis]: https://travis-ci.org/HawkBitPhp/hawkbit
-[link-downloads]: https://packagist.org/packages/hawkbit/hawkbit
+[link-downloads]: https://packagist.org/packages/hawkbit/hawkbit-doctrine
 [link-author]: https://github.com/mbunge
 [link-contributors]: ../../contributors
-[link-coveralls]: https://coveralls.io/github/HawkBitPhp/hawkbit
+[link-coveralls]: https://coveralls.io/github/HawkBitPhp/hawkbit-doctrine

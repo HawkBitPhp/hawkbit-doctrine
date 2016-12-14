@@ -6,14 +6,14 @@
  * Time: 13:42
  */
 
-namespace Hawkbit\Persistence;
+namespace Hawkbit\Doctrine;
 
 
 use Doctrine\ORM\EntityManager;
 use Hawkbit\Application;
 use League\Container\ContainerAwareInterface;
 
-interface PersistenceServiceInterface
+interface DoctrineServiceInterface
 {
     const DEFAULT_CONNECTION_NAME = 'orm_default';
 
